@@ -9,3 +9,14 @@ C:\Users\user\RiderProjects\DJKKKK\DJKKKK\obj\Debug\DJKKKK.csproj.CoreCompileInp
 C:\Users\user\RiderProjects\DJKKKK\DJKKKK\obj\Debug\DJKKKK.exe
 C:\Users\user\RiderProjects\DJKKKK\DJKKKK\obj\Debug\DJKKKK.pdb
 C:\Users\user\RiderProjects\DJKKKK\DJKKKK\obj\Debug\DJKKKK.Form1.resources
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\bin\Debug\DJKKKK.exe.config
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\bin\Debug\DJKKKK.exe
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\bin\Debug\DJKKKK.pdb
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.csproj.AssemblyReference.cache
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.csproj.SuggestedBindingRedirects.cache
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.Form1.resources
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.Properties.Resources.resources
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.csproj.GenerateResource.cache
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.csproj.CoreCompileInputs.cache
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.exe
+C:\Users\bntw\RiderProjects\TTTT\DJKKKK\DJKKKK\obj\Debug\DJKKKK.pdb

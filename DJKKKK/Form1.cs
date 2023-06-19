@@ -14,7 +14,9 @@ namespace DJKKKK
   public partial class Form1 : Form
   {
       private TextBox[,] boards ;
-      private int[,] shortest = new int[1010,1010]; // [original x , original y , to x , to y]
+      private int[,] shortest = new int[100,100]; // [original x , original y , to x , to y]
+      private int[] basic = new int[100];
+      private int[,] reverseTable = new int[100, 100];
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +35,8 @@ namespace DJKKKK
             };
         }
 
+        private const int max = int.MaxValue / 128;
+
         private void button1_Click(object sender, EventArgs e)
         {
             
@@ -40,7 +44,7 @@ namespace DJKKKK
             {
                 for (int j = 0; j < 100; j++)
                 {
-                    shortest[i,j] = int.MaxValue/128;
+                    shortest[i,j] = max;
                 }
             }
             
@@ -55,7 +59,7 @@ namespace DJKKKK
                     {
                         string temp = br.ReadString();
                         boards[i, j].Text = temp;
-                        shortest[i*10+ j, i*10+ j] = Convert.ToInt32(temp);
+                        basic[i * 10 + j] = Convert.ToInt32(temp);
                         //MessageBox.Show(shortest[i*10+ j, i*10+ j]+"");
                     }
                 }
@@ -64,66 +68,77 @@ namespace DJKKKK
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int diff = 0; diff < 100; diff++)
+
+            for (int no = 0; no < 100; no++)
             {
-                for (int first = 0; first < 100; first++)
+                if (no % 10 != 9)
                 {
+                    shortest[no, no + 1] = basic[no] + basic[no + 1];
+                    shortest[no + 1, no] = basic[no] + basic[no + 1];
+                }
 
-                    
-                    var end = first + diff;
-                    if(end >= 100) continue;
-                    
-                    
-                    int y=first+diff*10,x=first+diff;
-                    if (y < 100)
+                if (no / 10 != 9)
+                {
+                    shortest[no, no + 10] = basic[no] + basic[no + 10];
+                    shortest[no + 10, no] = basic[no] + basic[no + 10];
+                }
+            } //setup neighbor
+
+            for (int no = 0; no < 100; no++)
+            {
+                for (int insert = 0; insert < 100; insert++)
+                {
+                    if (shortest[no, insert] == max)
+                        continue; //
+                    for (int end = 0; end < 100; end++)
                     {
-                        int temp = int.MaxValue;
-                        for (int j = 0; j < diff; j++)
-                        {
-                            temp = Math.Min(shortest[first,first+ j*10]+shortest[first+(j+1)*10,y],temp);
-
-                        }
-
-                        if (temp < shortest[first, y])
-                        {
-                            shortest[first, y] = temp;
-                        }
-                        //if(first==0 && y== 10)MessageBox.Show($"short {first},{x} {temp}");
-
-
+                        if (shortest[insert, end] == max)
+                            continue;
+                        shortest[no, end] = Min(no, insert, end);
+                        shortest[end, no] = shortest[no, end];
                     }
-
-                    //MessageBox.Show($"{first} & {x}");
-                    if (x < 100 && first / 10 == x / 10)
-                    {
-                        int temp = int.MaxValue;
-                        for (int j = first; j < x; j+=10)
-                        {
-                            temp = Math.Min(shortest[first, j]+shortest[j+1,x],temp);
-                        }
-                        
-                        if (temp < shortest[first, x])
-                        {
-                            shortest[first, x] = temp;
-                        }
-                        
-                    }
-
-
-                    
-                    for (int i = first; i <= end; i++)
-                    {
-                        var temp = shortest[first, i] + shortest[i, end]-shortest[i,i];
-                        //if(first==0 && end == 11)MessageBox.Show($"{first},{end},{diff},{i},{shortest[first, i]},{shortest[i, end]}\t{temp},{shortest[0, 11]}");
-                        if (temp < shortest[first, end])
-                            shortest[first,end] = temp;
-                    }
-                    
                 }
             }
 
-            MessageBox.Show($"{shortest[0,11]}");//0 99 975
 
+
+            
+            ChangeColor(0,99);
+            //MessageBox.Show($"{shortest[0, 99]}"); //0 99 97
+            label1.Text = $"{shortest[0, 99]}";
         }
+
+        int Min(int no, int insert, int end)
+        {
+            if (shortest[no, end] > shortest[no, insert] + shortest[insert, end] - basic[insert])
+            {
+                reverseTable[no,end] = insert;
+                reverseTable[end,no] = insert;
+                return shortest[no, insert] + shortest[insert, end] - basic[insert];
+            }
+
+            return shortest[no, end];
+        }
+
+
+        private void ChangeColor(int start, int end)
+        {
+
+            
+
+
+            if (start == end || reverseTable[start, end] == 0)
+            {
+                boards[start/10,start%10].ForeColor = Color.Blue;
+                boards[end/10,end%10].ForeColor = Color.Blue;
+                return;
+            }
+            
+            ChangeColor(start,reverseTable[start,end]);
+            ChangeColor(reverseTable[start,end],end);
+
+            
+        }
+
   }
 }
